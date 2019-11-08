@@ -2,23 +2,41 @@
 <html>
     <head>
         <title>Logo Configurator</title>
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css" type="text/css">
     </head>
-
+    
     <body>
-        <h2>Owlet60 Logo Configurator</h2>
-        <br/>
-
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <h2>QMK Logo Configurator</h2>
+            </div>
+        </div>
+        
+        <div class="pure-g">
+            <div class="pure-u-4-5">
+                <canvas id="mainCanvas" width="408" height="102"></canvas>
+            </div>
+            <div class="pure-u-1-5">
+                <div id="editorTools">
+                    <button>ADF</button>
+                    <button>QWE</button>
+                    <button>asll</button>
+                    <button>;a;dsf</button>
+                </div>
+            </div>
+        </div>
+        
         <form action='actionUrl' method='GET'>
-            <button type='submit'>Logo and Indicator</button>
-            <button type='submit'>Logo Only</button>
-            <button type='submit'>All Fonts</button>
+                <button type='submit'>Logo and Indicator</button>
+                <button type='submit'>Logo Only</button>
+                <button type='submit'>All Fonts</button>
         </form>
         <br/>
 
-        <div>
-            <div>
-                <canvas id="mainCanvas" width="24" height="102" style="border: 1px solid black; width: 96px; height: 408px; touch-action: none;" ></canvas>
-            </div>
+        <div id="editorField">
+
             <div>
                 <textarea id="result" rows="5" cols="20"></textarea>
             </div>
@@ -38,6 +56,19 @@
         <input type="text" name="Text" id="form" value="OWLET60">
         <button type="submit" onclick="addText()">Add Text</button>
         <br/>
+        
+        <div id="fontPreview">        
+            <h3>Font Preview</h3>
+            <div>
+                <canvas id="displayCanvas" widht="680" height="120"></canvas>
+            </div>
+            <div>
+                <button>New Font</button>
+                <button>Default Font</button>
+                <button>Upload Font</button>
+                <button>Download Font</button>
+            </div>
+        </div>
 
         <button type='submit' onclick="printHex()">Generate Font File</button>
 
