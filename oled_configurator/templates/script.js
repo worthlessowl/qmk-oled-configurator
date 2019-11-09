@@ -1,8 +1,11 @@
-var main = (function () {
+/*jslint browser: true*/
+/*global $, jQuery*/
+
+$(document).ready(function () {
     "use strict";
     // Global inits
     var draw,
-        e = document.getElementById('mainCanvas'),
+        e =  document.getElementById('mainCanvas'),
         elemLeft = e.offsetLeft,
         elemTop = e.offsetTop,
         context = e.getContext('2d'),
@@ -77,7 +80,7 @@ var main = (function () {
         for (i = 0; i < text.length; i += 1) {
             canvas.fillText(text.charAt(i), 11, 15 * i + 11);
         }
-        draw = Boolean(false);
+        draw = false;
     }
 
     // RAW Binary (1010101010001010001001011111....)
@@ -185,12 +188,12 @@ var main = (function () {
 
     // main Method
     context.fillStyle = '#ffffff';
-    context.fillRect(0, 0, 32, 102);
-    undoStack[0] = context.getImageData(0, 0, 32, 102);
+    context.fillRect(0, 0, 408, 102);
+    undoStack[0] = context.getImageData(0, 0, 408, 102);
 
 
     // event listener for click event
-    e.addEventListeners('click', function (event) {
+    e.addEventListener('click', function (event) {
         var xVal = event.pageX - elemLeft,
             yVal = event.pageY - elemTop;
         elements.forEach(function (ele) {
@@ -218,14 +221,14 @@ var main = (function () {
     //mobile support
 
     e.addEventListener('pointerdown', function (event) {
-        draw = Boolean(true);
+        draw = true;
     }, false);
 
     e.addEventListener('pointerup', function (event) {
-        draw = Boolean(false);
+        draw = false;
         redoStack = [];
         redoStack[0] = context.getImageData(0, 0, 32, 102);
-        save();
+        save(context, undoStack);
     }, false);
 
     e.addEventListener('pointermove', function (event) {
@@ -288,14 +291,14 @@ var main = (function () {
     */
 
     elements.push({
-        colour: '#000000',
-        width: 128,
-        height: 448,
+        coloor: '#000000',
+        width: 408,
+        height: 102,
         top: 0,
         left: 0
     });
     elements.forEach(function (ele) {
-        context.fillStyle = elements.colour;
+        context.fillStyle = elements.color;
         context.fillRect(ele.left, ele.top, ele.width, ele.height);
     });
-}());
+});
