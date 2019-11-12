@@ -1,9 +1,7 @@
 #mainCanvas {
-    width: 95%;
-    height: 95%;
-    border-width: 1px;
+    border-width: 5px;
     border-style: solid;
-    border-color: black;
+    border-color: dimgray;
     display: block;
     margin: auto;
 }
@@ -14,7 +12,52 @@
 }
 
 #displayCanvas {
+    width: 50%;
+    height: 50%;
     border: 1px;
     border-style: solid;
     border-color: black;
+}
+
+#textPreview {
+    width: 100%;
+    height: 25%;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+#imagePreview {
+    width: 50%;
+    height: 50%;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+}
+
+#toolbox {
+    background-color: #202020;
+}
+
+#toolboxHeader {
+    border-bottom-style: solid;
+    border-bottom-color: dimgray;
+}
+
+body {
+    background-color: #121212;
+}
+
+.navbar {
+    background-color: #101010;
+    border-bottom-style: solid;
+    border-bottom-color: dimgray
+}
+
+#poli {
+    width: 100%
+}
+
+#brushSize {
+    width: 38%;
 }

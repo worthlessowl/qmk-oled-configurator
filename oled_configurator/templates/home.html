@@ -2,77 +2,162 @@
 <html>
     <head>
         <title>Logo Configurator</title>
-        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/iconicss/master/dist/iconicss.min.css">
         <link rel="stylesheet" href="style.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="script.js"></script>
     </head> 
     
     <body>
-        <div class="pure-g">
-            <div class="pure-u-1">
-                <h2>QMK Logo Configurator</h2>
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <p class="title has-text-light">QMK OLED Configurator</p>
             </div>
-        </div>
-        
-        <div class="pure-g">
-            <div class="pure-u-4-5">
-                <canvas id="mainCanvas" width="408" height="102"></canvas>
-            </div>
-            <div class="pure-u-1-5">
-                <div id="editorTools">
-                    <button>ADF</button>
-                    <button>QWE</button>
-                    <button>asll</button>
-                    <button>;a;dsf</button>
+        </nav>
+        <section class="section has-text-light">
+            <div class="columns is-vcentered has-text-centered" id="editor">
+                <div class="column is-10">
+                    <canvas id="mainCanvas" width="800" height="200"></canvas>
+                </div>
+                <div class="column is-2" id="toolbox">
+                    <div id="editorTools">
+                        <div class="columns" id="toolboxHeader">
+                            <div class="column is-12">
+                                <p>Toolbox</p>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <i class="icss-pencil"></i> 
+                            </div>
+                            <div class="column">
+                                <i class="icss-circle"></i>
+                            </div>
+                            <div class="column">
+                                <i class="icss-circle-o"></i>
+                            </div>
+                            <div class="column">
+                                <i class="icss-paint-bucket"></i>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <i class="icss-exchange"></i>
+                            </div>
+                            <div class="column">
+                                <i class="icss-scissors"></i>
+                            </div>
+                            <div class="column">
+                                <i class="icss-x"></i>
+                            </div>
+                            <div class="column">
+                                <i class="icss-trash"></i>
+                            </div>
+
+                        </div>
+                        <div class="columns">
+                            <div class="column is-one-half">
+                                <i class="icss-arrow-left"></i>
+                            </div>
+                            <div class="column is-one-half">
+                                <i class="icss-arrow-right"></i>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-8">
+                                <input type="range" min="1" max="8" value="1" class="slider" id="poli">
+                            </div>
+                            <div class="column is-5">
+                                <input type="text" size="1" maxlength="1" id="brushSize">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
         
-        <form action="actionUrl" method="GET">
-                <button type="submit">Logo and Indicator</button>
-                <button type="submit">Logo Only</button>
-                <button type="submit">All Fonts</button>
-        </form>
-        <br/>
-
-        <div id="editorField">
-
-            <div>
-                <textarea id="result" rows="5" cols="20"></textarea>
+        <section class="section">
+            <div class="columns">
+                <div class="column">
+                    <h4>Insert Text :</h4>
+                </div>
+                <div class="column">
+                    <h4>Insert Image:</h4>
+                </div>
             </div>
-        </div>
-        <br/>
 
-
-        <button type="submit" onclick="undo()">Undo</button>
-        <button type="submit" onclick="redo()">Redo</button>
-        <button type="submit" onclick="clearCanvas()">Clear</button>
-        <button type="submit" onclick="invert()">Invert</button>
-        <br/>
-
-        Insert Text (10 Characters Max):
-        <br/>
-
-        <input type="text" name="Text" id="form" value="OWLET60">
-        <button type="submit" onclick="addText()">Add Text</button>
-        <br/>
+            <div class="columns">
+                <div class="column is-3">
+                    <input type="text" name="Text" id="form" value="OWLET60">
+                    <button type="submit" onclick="addText()">Add Text</button>
+                </div>
+                <div class="column is-3">
+                    <canvas id="textPreview" width="100" height="100"></canvas>
+                </div>
+                <div class="column is-2">
+                    <div class="columns">
+                        <div class="column">
+                            <button>Select Image</button>
+                        </div>
+                        <div class="column">
+                            <button>Delete Image</button>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <input type="text" size="3">
+                        </div>
+                        <div class="column">
+                            <input type="text" size="3">
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <input type="range" min="1" max="8" value="1" class="slider">
+                    </div>
+                    <div class="columns">
+                        <input type="range" min="1" max="8" value="1" class="slider">
+                    </div>
+                    <div class="columns">
+                        <input type="range" min="1" max="8" value="1" class="slider">
+                    </div>
+                    <div class="columns">
+                        <input type="range" min="1" max="8" value="1" class="slider">
+                    </div>
+                </div>
+                <div class="column is-5">
+                    <canvas id="imagePreview" width="100" height="100"></canvas>
+                </div>
+            </div>
+        </section>
         
-        <div id="fontPreview">        
-            <h3>Font Preview</h3>
-            <div>
-                <canvas id="displayCanvas" widht="680" height="120"></canvas>
-            </div>
-            <div>
-                <button>New Font</button>
-                <button>Default Font</button>
-                <button>Upload Font</button>
-                <button>Download Font</button>
-            </div>
-        </div>
+        <section class="section">
+            <div class="columns" id="fontPreview">
+                <div class="column">
+                    <div class="columns">
+                        <h4>Font Preview</h4>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <canvas id="displayCanvas" widht="800" height="100"></canvas>
+                        </div>
+                        <div class="column">
+                            <input type="text">
+                            X
+                            <input type="text">
+                        </div>
 
-        <button type="submit" onclick="printHex()">Generate Font File</button>
+                    </div>
+                    <div class="columns">
+                        <button>New Font</button>
+                        <button>Default Font</button>
+                        <button>Upload Font</button>
+                        <button>Download Font</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </body>
 
 </html>

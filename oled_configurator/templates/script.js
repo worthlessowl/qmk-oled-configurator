@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global $, jQuery*/
+/*global $, jQuery, console*/
 
 $(document).ready(function () {
     "use strict";
@@ -18,7 +18,7 @@ $(document).ready(function () {
     // Clear Canvas Function
     function clearCanvas(canvas) {
         canvas.fillStyle = '#ffffff';
-        canvas.fillRect(0, 0, 32, 102);
+        canvas.fillRect(0, 0, canvas.width, canvas.length);
     }
 
     // Undo Function
@@ -46,11 +46,11 @@ $(document).ready(function () {
 
     // Save State After Each MouseUp
     function save(canvas, uStack) {
-        uStack.push(canvas.getImageData(0, 0, 32, 102));
+        uStack.push(canvas.getImageData(0, 0, canvas.width, canvas.length));
     }
 
     function invert(canvas, uStack, rStack) {
-        var img = canvas.getImageData(0, 0, 32, 102),
+        var img = canvas.getImageData(0, 0, canvas.width, canvas.length),
             pix = img.data,
             i;
 
@@ -58,6 +58,7 @@ $(document).ready(function () {
         rStack = [];
 
         for (i = 0; i < pix.length; i += 4) {
+            // Check if pixel is not black, if not, turn it to white, if it is, turn to black
             if (pix[i] > 0) {
                 pix[i] = 0;
                 pix[i + 1] = 0;
@@ -70,7 +71,8 @@ $(document).ready(function () {
         }
         canvas.putImageData(img, 0, 0);
     }
-
+    
+/* Change functionality, right now is unused
     function addText(doc, canvas) {
         var text = doc.getElementById("form").value,
             i;
@@ -82,11 +84,12 @@ $(document).ready(function () {
         }
         draw = false;
     }
+*/
 
     // RAW Binary (1010101010001010001001011111....)
     function parseImg(canvas) {
         var binaryState = [],
-            img = canvas.getImageData(0, 0, 32, 102),
+            img = canvas.getImageData(0, 0, canvas.width, canvas.length),
             pix = img.data,
             i;
         for (i = 0; i < pix.length; i += 4) {
@@ -100,6 +103,7 @@ $(document).ready(function () {
     }
 
     // Formatted Binary (10101010, 01110000, 0000000, ...)
+    // Right now it only works for qmk logo minus 2 character 102 x 24 image
     function binary2array2D(arr) {
         var mainArray = [],
             counter = 0,
@@ -145,6 +149,7 @@ $(document).ready(function () {
         return A.split(",");
     }
 
+    // Curently only swap out default qmk font logo with user logo
     function finalMerge(oledHexString, userFont) {
         var tempFont = userFont,
             i;
@@ -187,113 +192,68 @@ $(document).ready(function () {
     }
 
     // main Method
-    context.fillStyle = '#ffffff';
-    context.fillRect(0, 0, 408, 102);
-    undoStack[0] = context.getImageData(0, 0, 408, 102);
-
+    context.fillStyle = '#000000';
+    context.fillRect(0, 0, e.width, e.height);
+    undoStack[0] = context.getImageData(0, 0, e.width, e.height);
+    console.log("init reached");
 
     // event listener for click event
     e.addEventListener('click', function (event) {
-        var xVal = event.pageX - elemLeft,
-            yVal = event.pageY - elemTop;
+        var xVal = event.clientX - elemLeft,
+            yVal = event.clientY - elemTop;
+        console.log("click");
         elements.forEach(function (ele) {
-            if (yVal > ele.top && yVal < ele.height * 4 && xVal > ele.left && xVal < ele.width * 4) {
-                context.fillRect(Math.floor(xVal / 4) + 0.5, Math.floor(yVal / 4) + 0.5, 1, 1);
+            if (yVal > ele.top && yVal < ele.height && xVal > ele.left && xVal < ele.width) {
+                context.fillRect(xVal, yVal, 1, 1);
             }
         });
     }, false);
-
-
-    /*e.addEventListener('mousedown', function(event) {
-        e.addEventListener('mousemove', function(event) {
-            var xVal = event.pageX - elemLeft,
-            yVal = event.pageY - elemTop;
-            console.log(xVal, yVal);
-            elements.forEach(function(ele) {
-                if (yVal > ele.top && yVal < ele.height*4 && xVal > ele.left && xVal < ele.width*4) {
-                    context.fillRect(Math.floor(xVal/4), Math.floor(yVal/4), 1, 1);
-                    console.log(xVal/4, yVal/4);
-                };
-            });
-        }, false);
-    }, false);*/
 
     //mobile support
 
     e.addEventListener('pointerdown', function (event) {
         draw = true;
+        console.log("pointerdown");
     }, false);
 
     e.addEventListener('pointerup', function (event) {
         draw = false;
         redoStack = [];
-        redoStack[0] = context.getImageData(0, 0, 32, 102);
+        console.log("pointerup");
+        redoStack[0] = context.getImageData(0, 0, e.width, e.height);
         save(context, undoStack);
     }, false);
 
     e.addEventListener('pointermove', function (event) {
+        console.log("pointermove");
         if (draw === true) {
             var xVal = event.pageX - elemLeft,
                 yVal = event.pageY - elemTop;
-            context.fillStyle = "#000000";
+            context.fillStyle = "#ffffff";
             elements.forEach(function (ele) {
-                if (yVal > ele.top && yVal < ele.height * 4 && xVal > ele.left && xVal < ele.width * 4) {
-                    context.fillRect(Math.floor(xVal / 4), Math.floor(yVal / 4), 1, 1);
+                if (yVal > ele.top && yVal < ele.height && xVal > ele.left && xVal < ele.width) {
+                    context.fillRect(xVal, yVal, 1, 1);
                 }
             });
         }
     }, false);
-
+    
+    //Duplicate code? for now remove
+    /*
     e.addEventListener('pointerup', function (event) {
         var xVal = event.pageX - elemLeft,
             yVal = event.pageY - elemTop;
         elements.forEach(function (ele) {
-            if (yVal > ele.top && yVal < ele.height * 4 && xVal > ele.left && xVal < ele.width * 4) {
-                context.fillRect(Math.floor(xVal / 4), Math.floor(yVal / 4), 1, 1);
+            if (yVal > ele.top && yVal < ele.height && xVal > ele.left && xVal < ele.width) {
+                context.fillRect(xVal, yVal, 1, 1);
             }
         });
     }, false);
-
-    // working code
-    /*e.addEventListener('mousedown', function(event) {
-        draw = new Boolean(true);
-    }, false);
-
-    e.addEventListener('mouseup', function(event) {
-        draw = new Boolean(false);
-        redoStack = [];
-        redoStack[0] = context.getImageData(0, 0, 32, 102);
-        save();
-    }, false);
-
-    e.addEventListener('mousemove', function(event) {
-            if(draw == true) {
-                var xVal = event.pageX - elemLeft,
-            yVal = event.pageY - elemTop;
-            context.fillStyle = "#000000";
-            elements.forEach(function(ele) {
-                if (yVal > ele.top && yVal < ele.height*4 && xVal > ele.left && xVal < ele.width*4) {
-                    context.fillRect(Math.floor(xVal/4), Math.floor(yVal/4), 1, 1);
-                };
-            });
-            }
-        }, false);
-
-    e.addEventListener('mouseup', function(event) {
-    var xVal = event.pageX - elemLeft,
-    yVal = event.pageY - elemTop;
-    elements.forEach(function(ele) {
-        if (yVal > ele.top && yVal < ele.height*4 && xVal > ele.left && xVal < ele.width*4) {
-            context.fillRect(Math.floor(xVal/4), Math.floor(yVal/4), 1, 1);
-        };
-    });
-    }, false);
     */
-
     elements.push({
-        coloor: '#000000',
-        width: 408,
-        height: 102,
+        color: '#ffffff',
+        width: e.width,
+        height: e.height,
         top: 0,
         left: 0
     });
