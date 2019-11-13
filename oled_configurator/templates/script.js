@@ -199,8 +199,10 @@ $(document).ready(function () {
 
     // event listener for click event
     e.addEventListener('click', function (event) {
-        var xVal = event.clientX - elemLeft,
-            yVal = event.clientY - elemTop;
+        var winX = event.clientX - elemLeft,
+            winY = event.clientY - elemTop,
+            xVal = winX * context.canvas.width / context.canvas.clientWidth,
+            yVal = winY * context.canvas.height / context.canvas.clientHeight;
         console.log("click");
         elements.forEach(function (ele) {
             if (yVal > ele.top && yVal < ele.height && xVal > ele.left && xVal < ele.width) {
@@ -227,8 +229,10 @@ $(document).ready(function () {
     e.addEventListener('pointermove', function (event) {
         console.log("pointermove");
         if (draw === true) {
-            var xVal = event.pageX - elemLeft,
-                yVal = event.pageY - elemTop;
+            var winX = event.pageX - elemLeft,
+                winY = event.pageY - elemTop,
+                xVal = winX * context.canvas.width / context.canvas.clientWidth,
+                yVal = winY * context.canvas.height / context.canvas.clientHeight;
             context.fillStyle = "#ffffff";
             elements.forEach(function (ele) {
                 if (yVal > ele.top && yVal < ele.height && xVal > ele.left && xVal < ele.width) {
