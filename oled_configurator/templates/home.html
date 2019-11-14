@@ -21,7 +21,7 @@
                 <div class="column is-10">
                     <div class="columns">
                         <div class="column is-12">
-                            <canvas id="mainCanvas" width="800" height="200"></canvas>
+                            <canvas class="canvas" width="800" height="200"></canvas>
                         </div>
                     </div>
                     <div class="columns">
@@ -31,9 +31,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-2" id="toolbox">
-                    <div id="editorTools">
-                        <div class="columns" id="toolboxHeader">
+                <div class="column is-2 toolbox">
+                    <div>
+                        <div class="columns toolboxHeader">
                             <div class="column is-12">
                                 <p>Toolbox</p>
                             </div>
@@ -103,21 +103,21 @@
                 </div>
             </div>
 
-            <div class="columns" id="toolbox">
-                <div class="column is-3">
+            <div class="columns toolbox">
+                <div class="column is-2">
                     <input type="text" name="Text" id="form" value="OWLET60">
-                    <button type="submit" onclick="addText()">Add Text</button>
+                    <button class="button is-dark is-small">Add Text</button>
                 </div>
-                <div class="column is-3">
-                    <canvas id="textPreview" width="100" height="100"></canvas>
+                <div class="column is-4">
+                    <canvas class="canvas" width="100" height="100"></canvas>
                 </div> 
                 <div class="column is-2">
                     <div class="columns">
-                        <div class="column">
-                            <button>Select Image</button>
+                        <div class="column is-6 has-text-centered">
+                            <button class="button is-dark is-small is-fullwidth">Select Image</button>
                         </div>
-                        <div class="column">
-                            <button>Delete Image</button>
+                        <div class="column is-6">
+                            <button class="button is-dark is-small is-fullwidth">Delete Image</button>
                         </div>
                     </div>
                     <div class="columns">
@@ -141,8 +141,8 @@
                         <input type="range" min="1" max="8" value="1" class="slider">
                     </div>
                 </div>
-                <div class="column is-5">
-                    <canvas id="imagePreview" width="100" height="100"></canvas>
+                <div class="column is-4">
+                    <canvas class="canvas" width="100" height="100"></canvas>
                 </div>
             </div>
         </section>
@@ -159,20 +159,20 @@
                     </div>
                     <div class="columns">
                         <div class="column is-vcentered has-text-centered">
-                            <canvas id="displayCanvas" widht="800" height="100"></canvas>
+                            <canvas class="canvas" widht="800" height="100"></canvas>
                         </div>
 
                     </div>
                     <div class="columns">
-                        <button id="but">New Font</button>
-                        <button>Default Font</button>
-                        <button>Upload Font</button>
-                        <button>Download Font</button>
+                        <button class="button is-dark is-small">New Font</button>
+                        <button class="button is-dark is-small">Default Font</button>
+                        <button class="button is-dark is-small">Upload Font</button>
+                        <button class="button is-dark is-small">Download Font</button>
                     </div>
                 </div>
             </div>
                 </div>
-                <div class="column is-2" id="toolbox">
+                <div class="column is-2 toolbox">
                     <div class="columns">
                         <div class="column is-12 is-vcentered has-text-centered" id="toolboxHeader">
                             <p>Font Settings</p>
