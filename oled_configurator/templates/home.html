@@ -19,7 +19,17 @@
         <section class="section has-text-light">
             <div class="columns is-vcentered has-text-centered" id="editor">
                 <div class="column is-10">
-                    <canvas id="mainCanvas" width="800" height="200"></canvas>
+                    <div class="columns">
+                        <div class="column is-12">
+                            <canvas id="mainCanvas" width="800" height="200"></canvas>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-12">
+                            <button class="button is-small is-dark">Previous Character</button>
+                            <button class="button is-small is-dark">Next Character</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="column is-2" id="toolbox">
                     <div id="editorTools">
@@ -71,6 +81,11 @@
                             </div>
                             <div class="column is-5">
                                 <input type="text" size="1" maxlength="1" id="brushSize">
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-12">
+                                <button class="button is-small is-dark">Add Image/Text</button>
                             </div>
                         </div>
                     </div>
