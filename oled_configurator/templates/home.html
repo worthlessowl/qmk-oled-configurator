@@ -21,7 +21,7 @@
                 <div class="column is-10">
                     <div class="columns">
                         <div class="column is-12">
-                            <canvas class="canvas" width="800" height="200"></canvas>
+                            <canvas class="canvas" id="editorCanvas" width="800" height="200"></canvas>
                         </div>
                     </div>
                     <div class="columns">
@@ -85,7 +85,7 @@
                         </div>
                         <div class="columns">
                             <div class="column is-12">
-                                <button class="button is-small is-dark">Add Image/Text</button>
+                                <button class="button is-small is-dark" id="toggleAccordion">Add Image/Text</button>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
             </div>
         </section>
         
-        <section class="section has-text-white">
+        <section class="section has-text-white hiddenTool">
             <div class="columns">
                 <div class="column">
                     <h4>Insert Text :</h4>

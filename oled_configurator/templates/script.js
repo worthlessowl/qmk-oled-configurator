@@ -5,7 +5,9 @@ $(document).ready(function () {
     "use strict";
     // Global inits
     var draw,
-        e =  document.getElementById('mainCanvas'),
+        e =  document.getElementById('editorCanvas'),
+        accButton = document.getElementById('toggleAccordion'),
+        accordion = document.getElementsByClassName("hiddenTool"),
         elemLeft = e.offsetLeft,
         elemTop = e.offsetTop,
         context = e.getContext('2d'),
@@ -240,6 +242,17 @@ $(document).ready(function () {
                     context.fillRect(xVal, yVal, 1, 1);
                 }
             });
+        }
+    }, false);
+    
+    accButton.addEventListener('click', function (event) {
+        var i;
+        for (i = 0; i < accordion.length; i += 1) {
+            if (accordion[i].style.display === "none") {
+                accordion[i].style.display = "block";
+            } else {
+                accordion[i].style.display = "none";
+            }
         }
     }, false);
     
