@@ -192,6 +192,7 @@ $(document).ready(function () {
     }
 
     // main Method
+    
     context.fillStyle = '#000000';
     context.fillRect(0, 0, e.width, e.height);
     undoStack[0] = context.getImageData(0, 0, e.width, e.height);
@@ -254,6 +255,7 @@ $(document).ready(function () {
         });
     }, false);
     */
+    
     elements.push({
         color: '#ffffff',
         width: e.width,

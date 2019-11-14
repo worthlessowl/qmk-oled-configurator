@@ -6,6 +6,10 @@
     border-color: dimgray;
     display: block;
     margin: auto;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
 #editorTools {
@@ -14,8 +18,8 @@
 }
 
 #displayCanvas {
-    width: 50%;
-    height: 50%;
+    width: 95%;
+    height: 95%;
     border: 1px;
     border-style: solid;
     border-color: black;
@@ -54,10 +58,6 @@ body {
     background-color: #101010;
     border-bottom-style: solid;
     border-bottom-color: dimgray
-}
-
-#poli {
-    width: 100%
 }
 
 #brushSize {
