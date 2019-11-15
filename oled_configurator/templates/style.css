@@ -36,6 +36,44 @@ body {
     border-bottom-color: dimgray
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 70px;
+    background-color: #323232;
+    color: #fff;
+    text-align: center;;
+    padding: 5px 0;
+    border-radius: 6px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -35px;
+    
+    position:absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    font-size: 12px;
+}
+
+.tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #323232 transparent
+        transparent transparent;
+}
+
 #brushSize {
     width: 38%;
 }
