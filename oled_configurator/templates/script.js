@@ -6,6 +6,13 @@ $(document).ready(function () {
     // Global inits
     var draw,
         e =  document.getElementById('editorCanvas'),
+        drawB = document.getElementById("drawB"),
+        onPixB = document.getElementById("onPixB"),
+        offPixB = document.getElementById("offPixB"),
+        bucketB = document.getElementById("bucketB"),
+        invertB = document.getElementById("invertB"),
+        cropB = document.getElementById("cropB"),
+        
         accButton = document.getElementById('toggleAccordion'),
         accordion = document.getElementsByClassName("hiddenTool"),
         elemLeft = e.offsetLeft,
