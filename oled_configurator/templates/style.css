@@ -4,6 +4,7 @@
     border-style: solid;
     border-color: dimgray;
     display: block;
+    cursor: crosshair;
     margin: auto;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;

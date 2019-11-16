@@ -15,6 +15,8 @@ $(document).ready(function () {
         
         accButton = document.getElementById('toggleAccordion'),
         accordion = document.getElementsByClassName("hiddenTool"),
+        
+        boundRect = e.getBoundingClientRect(),
         elemLeft = e.offsetLeft,
         elemTop = e.offsetTop,
         context = e.getContext('2d'),
@@ -209,10 +211,10 @@ $(document).ready(function () {
 
     // event listener for click event
     e.addEventListener('click', function (event) {
-        var winX = event.clientX - elemLeft,
-            winY = event.clientY - elemTop,
-            xVal = winX * context.canvas.width / context.canvas.clientWidth,
-            yVal = winY * context.canvas.height / context.canvas.clientHeight;
+        var winX = event.clientX - boundRect.left,
+            winY = event.clientY - boundRect.top,
+            xVal = winX * context.canvas.width / boundRect.width,
+            yVal = winY * context.canvas.height / boundRect.height;
         console.log("click");
         elements.forEach(function (ele) {
             if (yVal > ele.top && yVal < ele.height && xVal > ele.left && xVal < ele.width) {
@@ -239,10 +241,10 @@ $(document).ready(function () {
     e.addEventListener('pointermove', function (event) {
         console.log("pointermove");
         if (draw === true) {
-            var winX = event.pageX - elemLeft,
-                winY = event.pageY - elemTop,
-                xVal = winX * context.canvas.width / context.canvas.clientWidth,
-                yVal = winY * context.canvas.height / context.canvas.clientHeight;
+            var winX = event.pageX - boundRect.left,
+                winY = event.pageY - boundRect.top,
+                xVal = winX * context.canvas.width / boundRect.width,
+                yVal = winY * context.canvas.height / boundRect.height;
             context.fillStyle = "#ffffff";
             elements.forEach(function (ele) {
                 if (yVal > ele.top && yVal < ele.height && xVal > ele.left && xVal < ele.width) {
